@@ -53,6 +53,7 @@ class _CameraConnectScreenState extends State<CameraConnectScreen> {
         });
       }
     } catch (e) {
+      print('Error');
       setState(() {
         _connectionMessage = "Error connecting to backend: $e";
       });
