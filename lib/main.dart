@@ -26,8 +26,8 @@ class _CameraConnectScreenState extends State<CameraConnectScreen> {
 
   // Function to send RTSP link to the backend
   void connectCamera() async {
-    final url =
-        'http://192.168.137.1:5000/connect_camera'; // Replace <YOUR_BACKEND_IP> with the IP address of your Flask server
+    final url = 'http://10.0.2.2:5000/connect_camera';  // Use your actual IP address here
+
     final rtspUrl = _rtspController.text;
 
     try {
@@ -53,6 +53,8 @@ class _CameraConnectScreenState extends State<CameraConnectScreen> {
         });
       }
     } catch (e) {
+      print('Error');
+      print(e);
       setState(() {
         _connectionMessage = "Error connecting to backend: $e";
       });
