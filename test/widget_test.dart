@@ -1,30 +1,66 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-
-import 'package:rtsp_detection_app/main.dart';
+import 'package:video_player/video_player.dart';
+import 'package:chewie/chewie.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  runApp(MyApp());
+}
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Video Streaming App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: VideoStreamingScreen(),
+    );
+  }
+}
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+class VideoStreamingScreen extends StatefulWidget {
+  @override
+  _VideoStreamingScreenState createState() => _VideoStreamingScreenState();
+}
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
-  });
+class _VideoStreamingScreenState extends State<VideoStreamingScreen> {
+  late VideoPlayerController _videoPlayerController;
+  late ChewieController _chewieController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Replace with your RTSP or video URL
+    String videoUrl = 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
+
+    _videoPlayerController = VideoPlayerController.network(videoUrl);
+    _chewieController = ChewieController(
+      videoPlayerController: _videoPlayerController,
+      autoPlay: true,
+      looping: true,
+    );
+  }
+
+  @override
+  void dispose() {
+    _videoPlayerController.dispose();
+    _chewieController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Video Streaming"),
+      ),
+      body: Center(
+        child: Chewie(
+          controller: _chewieController,
+        ),
+      ),
+    );
+  }
 }

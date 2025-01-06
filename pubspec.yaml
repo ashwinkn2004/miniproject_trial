@@ -38,7 +38,9 @@ dependencies:
   video_player: ^2.5.3
   flutter_vlc_player: ^7.4.2
   flutter_webrtc: ^0.9.15
-  flutter_ffmpeg: ^0.4.0
+  #flutter_ffmpeg: ^0.4.0
+  chewie: ^1.8.5
+  native_video_player: ^2.0.0
 
 dev_dependencies:
   flutter_test:

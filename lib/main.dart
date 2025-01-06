@@ -33,7 +33,8 @@ class _CameraConnectScreenState extends State<CameraConnectScreen> {
     // Add listener for player state changes
     _vlcPlayerController?.addListener(() {
       if (_vlcPlayerController!.value.hasError) {
-        print("Error: ${_vlcPlayerController!.value.errorDescription}");
+        print(
+            "Errorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
       }
     });
   }
@@ -41,7 +42,7 @@ class _CameraConnectScreenState extends State<CameraConnectScreen> {
   // Function to send RTSP link to the backend and initialize streaming
   void connectCamera() async {
     final url =
-        'http://10.0.2.2:5000/connect_camera'; // Use your actual IP address here
+        'http://176.20.0.84:5000/connect_camera'; // Use your actual IP address here
 
     final rtspUrl = _rtspController.text;
 
@@ -61,6 +62,7 @@ class _CameraConnectScreenState extends State<CameraConnectScreen> {
             rtspUrl,
             autoInitialize: true, // Automatically initialize
             autoPlay: true, // Automatically play
+            options: VlcPlayerOptions(),
           );
         });
       } else {
